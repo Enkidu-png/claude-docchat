@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "docchat": {
+      "command": "python",
+      "args": [
+        "-m",
+        "src.mcp_server_official"
+      ],
+      "cwd": "C:\\Users\\Sasze\\docchat\\docchat",
+      "env": {
+        "PYTHONPATH": "C:\\Users\\Sasze\\docchat\\docchat"
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docchat-mcp-server"
+version = "1.0.0"
+description = "Semantic Document Search and Q&A System for Claude Desktop via MCP"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Enkidu-png", email = "jansachse@outlook.com"}
+]
+maintainers = [
+    {name = "Enkidu-png", email = "jansachse@outlook.com"}
+]
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "document-search",
+    "semantic-search",
+    "pdf",
+    "docx",
+    "nlp",
+    "embeddings",
+    "ai"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Indexing",
+    "Topic :: Office/Business :: Office Suites",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=0.2.0",
+    "mcp>=1.0.0",
+    "sentence-transformers>=2.2.0",
+    "PyMuPDF>=1.23.0",
+    "python-docx>=0.8.11",
+    "watchdog>=3.0.0",
+    "psutil>=5.9.0",
+    "chardet>=5.0.0",
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+openai = [
+    "openai>=1.0.0",
+]
+
+[project.scripts]
+docchat-mcp = "src.mcp_server_official:main"
+
+[project.urls]
+Homepage = "https://github.com/Enkidu-png/docchat-mcp-server"
+Documentation = "https://github.com/Enkidu-png/docchat-mcp-server#readme"
+Repository = "https://github.com/Enkidu-png/docchat-mcp-server"
+"Bug Tracker" = "https://github.com/Enkidu-png/docchat-mcp-server/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+src = ["config/*.py", "models/*.py", "services/*.py", "utils/*.py"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+asyncio_mode = "auto"
